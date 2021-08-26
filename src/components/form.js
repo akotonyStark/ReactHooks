@@ -8,6 +8,10 @@ const Form = (props) => {
   useEffect(() => {
     console.log('EFFECT TAKING PLACE')
     setName(name)
+
+    return () => {
+      console.log('component unMount')
+    }
   }, [])
 
   const nameChangeHandler = (event) => {
@@ -37,14 +41,14 @@ const Form = (props) => {
         ></input>
       </div>
 
-      <div>
+      {/* <div>
         <input
           style={{ width: '30%', height: '30px' }}
           type='text'
           placeholder='job'
           value={job}
         ></input>
-      </div>
+      </div> */}
 
       <input
         style={{ width: '30%', height: '30px' }}
