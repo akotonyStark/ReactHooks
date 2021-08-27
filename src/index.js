@@ -9,6 +9,7 @@ import UseEffectTest from './components/UseEffectTest'
 import UseEffectCleanup from './components/UseEffectCleanup'
 import IntervalHookCounter from './components/IntervalHookCounter'
 import UseEffectFetchData from './components/UseEffectFetchData'
+import UseEffectFetchItem from './components/UseEffectFetchItem'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,8 +19,9 @@ ReactDOM.render(
     <UseStateWithArrays />
     <UseEffectTest /> */}
     {/* <UseEffectCleanup /> */}
-    <IntervalHookCounter />
-    <UseEffectFetchData />
+    {/* <IntervalHookCounter />
+    <UseEffectFetchData /> */}
+    <UseEffectFetchItem />
   </React.StrictMode>,
   document.getElementById('root')
 )
