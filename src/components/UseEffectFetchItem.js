@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import axios from 'axios'
 
-function UseEffectFetchData() {
+function UseEffectFetchItem() {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
