@@ -1,7 +1,11 @@
 import React from 'react'
 
-function ComponentD() {
-  return <div></div>
+function ComponentD(props) {
+  return (
+    <div>
+      <h1>Username in Component D is {props.username}</h1>
+    </div>
+  )
 }
 
 export default ComponentD
