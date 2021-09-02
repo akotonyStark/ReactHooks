@@ -6,6 +6,7 @@ import ComponentA from './components/ComponentA'
 import ComponentB from './components/ComponentB'
 import ComponentF from './components/ComponentF'
 import ComponentE from './components/ComponentE'
+import CounterOne from './components/CounterOne'
 
 export const UserContext = createContext()
 export const PasswordContext = createContext()
@@ -21,6 +22,8 @@ function App() {
           <ComponentE />
         </PasswordContext.Provider>
       </UserContext.Provider>
+
+      <CounterOne />
 
       {/* <ComponentA username={username} />
       <ComponentB username={username} />
