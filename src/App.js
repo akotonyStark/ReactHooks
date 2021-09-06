@@ -8,6 +8,7 @@ import ComponentF from './components/ComponentF'
 import ComponentE from './components/ComponentE'
 import CounterOne from './components/UseReducerOne'
 import CounterTwo from './components/UseReducerTwo'
+import UseReducerThree from './components/UseReducerThree'
 
 export const UserContext = createContext()
 export const PasswordContext = createContext()
@@ -26,6 +27,7 @@ function App() {
 
       <CounterOne />
       <CounterTwo />
+      <UseReducerThree />
 
       {/* <ComponentA username={username} />
       <ComponentB username={username} />
