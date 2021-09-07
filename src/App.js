@@ -11,6 +11,7 @@ import CounterTwo from './components/UseReducerTwo'
 import UseReducerThree from './components/UseReducerThree'
 import UseReducerMultiple from './components/UseReducerMultiple'
 import ComponentD from './components/ComponentD'
+import UseReducerFetchData from './components/UseReducerFetchData'
 
 export const UserContext = createContext()
 export const PasswordContext = createContext()
@@ -37,7 +38,7 @@ function App() {
 
   return (
     <div className='App'>
-      <UserContext.Provider value={username}>
+      {/* <UserContext.Provider value={username}>
         <PasswordContext.Provider value={'Password@123'}>
           <ComponentF />
           <ComponentE />
@@ -57,7 +58,9 @@ function App() {
         <ComponentB username={username} />
         <ComponentC username={username} />
         <ComponentD />
-      </CountContext.Provider>
+      </CountContext.Provider> */}
+
+      <UseReducerFetchData />
     </div>
   )
 }
