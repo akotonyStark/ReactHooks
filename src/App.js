@@ -13,6 +13,8 @@ import UseReducerMultiple from './components/UseReducerMultiple'
 import ComponentD from './components/ComponentD'
 import UseReducerFetchData from './components/UseReducerFetchData'
 import UseRefHook from './components/UseRefHook'
+import HookTimer from './components/HookTimer'
+import ComponentG from './components/ComponentG'
 
 export const UserContext = createContext()
 export const PasswordContext = createContext()
@@ -39,10 +41,11 @@ function App() {
 
   return (
     <div className='App'>
-      {/* <UserContext.Provider value={username}>
+      <UserContext.Provider value={username}>
         <PasswordContext.Provider value={'Password@123'}>
           <ComponentF />
           <ComponentE />
+          <ComponentG />
         </PasswordContext.Provider>
       </UserContext.Provider>
 
@@ -59,10 +62,10 @@ function App() {
         <ComponentB username={username} />
         <ComponentC username={username} />
         <ComponentD />
-      </CountContext.Provider> */}
-
-      {/* <UseReducerFetchData /> */}
+      </CountContext.Provider>
+      <UseReducerFetchData />
       <UseRefHook />
+      <HookTimer />
     </div>
   )
 }
