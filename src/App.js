@@ -12,6 +12,7 @@ import UseReducerThree from './components/UseReducerThree'
 import UseReducerMultiple from './components/UseReducerMultiple'
 import ComponentD from './components/ComponentD'
 import UseReducerFetchData from './components/UseReducerFetchData'
+import UseRefHook from './components/UseRefHook'
 
 export const UserContext = createContext()
 export const PasswordContext = createContext()
@@ -60,7 +61,8 @@ function App() {
         <ComponentD />
       </CountContext.Provider> */}
 
-      <UseReducerFetchData />
+      {/* <UseReducerFetchData /> */}
+      <UseRefHook />
     </div>
   )
 }
