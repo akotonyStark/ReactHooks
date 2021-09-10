@@ -1,71 +1,102 @@
-import logo from './logo.svg'
 import './App.css'
-import { useReducer, createContext } from 'react'
-import ComponentC from './components/ComponentC'
-import ComponentA from './components/ComponentA'
-import ComponentB from './components/ComponentB'
-import ComponentF from './components/ComponentF'
-import ComponentE from './components/ComponentE'
-import CounterOne from './components/UseReducerOne'
-import CounterTwo from './components/UseReducerTwo'
-import UseReducerThree from './components/UseReducerThree'
-import UseReducerMultiple from './components/UseReducerMultiple'
-import ComponentD from './components/ComponentD'
-import UseReducerFetchData from './components/UseReducerFetchData'
-import UseRefHook from './components/UseRefHook'
-import HookTimer from './components/HookTimer'
-import ComponentG from './components/ComponentG'
+import NavBar from './components/NavBar'
+import Products from './components/Products'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import Loader from './components/Loader'
+import AddModal from './components/AddModal'
 
-export const UserContext = createContext()
-export const PasswordContext = createContext()
-export const CountContext = createContext()
-
-const username = 'Augustine'
-const initialCount = 0
-
-const reducer = (state, action) => {
-  switch (action) {
-    case 'increment':
-      return state + 1
-    case 'decrement':
-      return state - 1
-    case 'reset':
-      return initialCount
-    default:
-      return state
-  }
-}
+let initData = []
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialCount)
+  const [products, setProducts] = useState([])
+  const [isLoading, setIsloading] = useState(true)
+  const [open, setOpen] = useState(false)
+  const [liveData, setLiveData] = useState(initData)
+
+  const getData = async () => {
+    try {
+      const result = await fetch(
+        'http://www.mocky.io/v2/5c3e15e63500006e003e9795'
+      )
+      const data = await result.json()
+      if (data.products) {
+        data.products.map((item) => {
+          let newObj = {
+            id: item.id,
+            name: item.name,
+            currentPrice: item.prices[0].price,
+            prevPrice: item.prices[1].price,
+          }
+          initData.push(newObj)
+          setLiveData(initData)
+          localStorage.setItem('initData', JSON.stringify(initData))
+        })
+        setIsloading(false)
+        setProducts(initData)
+      }
+    } catch (error) {
+      setIsloading(false)
+      const offlineData = localStorage.getItem('initData')
+      //console.log(offlineData)
+      setLiveData(JSON.parse(offlineData))
+      setProducts(JSON.parse(offlineData))
+      console.log(error)
+    }
+
+    // axios
+    //   .get('http://www.mocky.io/v2/5c3e15e63500006e003e9795')
+    //   .then((res) => {
+    //     //console.log('Data:', res.data.products)
+    //     res.data.products.map((item) => {
+    //   let newObj = {
+    //     id: item.id,
+    //     name: item.name,
+    //     currentPrice: item.prices[0].price,
+    //     prevPrice: item.prices[1].price,
+    //   }
+    //   initData.push(newObj)
+    // })
+    //     console.log(initData)
+    //     setProducts(initData)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+    //   .finally(console.log('done'))
+  }
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const handleClickOpen = () => {
+    setOpen(!open)
+  }
 
   return (
     <div className='App'>
-      <UserContext.Provider value={username}>
-        <PasswordContext.Provider value={'Password@123'}>
-          <ComponentF />
-          <ComponentE />
-          <ComponentG />
-        </PasswordContext.Provider>
-      </UserContext.Provider>
-
-      <CounterOne />
-      <CounterTwo />
-      <UseReducerThree />
-      <UseReducerMultiple />
-
-      <CountContext.Provider
-        value={{ countState: state, countDispatch: dispatch }}
-      >
-        <h2>{state} </h2>
-        <ComponentA username={username} />
-        <ComponentB username={username} />
-        <ComponentC username={username} />
-        <ComponentD />
-      </CountContext.Provider>
-      <UseReducerFetchData />
-      <UseRefHook />
-      <HookTimer />
+      <NavBar
+        setProducts={setProducts}
+        handleClickOpen={handleClickOpen}
+        data={initData}
+        liveData={liveData}
+        setLiveData={setLiveData}
+      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Products products={products} setOpen={setOpen} />
+      )}
+      <AddModal
+        handleClickOpen={handleClickOpen}
+        open={open}
+        products={products}
+        setProducts={setProducts}
+        setOpen={setOpen}
+        data={initData}
+        liveData={liveData}
+        setLiveData={setLiveData}
+      />
     </div>
   )
 }
